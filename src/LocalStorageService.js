@@ -25,11 +25,17 @@ export default class LocalStorageService{
 
     static updateItem(key, item){
         let list = JSON.parse(localStorage.getItem(key));
-        list.forEach((elem, i) => {
-            if(elem.id === item.id){
-                list[i] = item;
+        let NewList = Object.entries(item);
+        list.forEach((elem,i) =>{
+            let entries = Object.entries(elem);
+
+            for (let j = 0; j < entries.length; j++) {
+                if (String(entries[j])===String(NewList[j])){
+                    list[i] = item;
+                }
             }
-        });
+
+        })
         localStorage.setItem(key, JSON.stringify(list));
     }
 
